@@ -1,0 +1,9 @@
+app = "dark-pine-4852"
+
+[[services]]
+  internal_port = 8080
+  protocol = "TCP"
+  [services.port.80]
+    handlers = ["HTTP"]
+  [services.port.443]
+    handlers = ["TLS", "HTTP"]
