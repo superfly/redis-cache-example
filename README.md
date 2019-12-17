@@ -1,89 +1,23 @@
-# Example Go app
+# Redis cache example
 
-## Getting Started
+This is a simple app written in go that connects to the fly redis cache defined in the FLY_REDIS_CACHE_URL env variable. It shows how to get, set, and delete cached data using the request path as the key. 
 
-**1. Install the Fly CLI**
 
-If you're on a Mac, you can install `flyctl` with Homebrew 
+**Setting data**
 
 ```bash
-$ brew install superfly/tap/flyctl
+curl -XPOST -d "Michael" https://go-redis-cache-example.fly.dev/name
 ```
 
-For other systems, use the install script:
+**Getting data**
+
 ```bash
-curl https://get.fly.io/flyctl.sh | sh
+curl https://go-redis-cache-example.fly.dev/name
 ```
 
-Checkout the docs for more ways to install [flyctl](https://github.com/superfly/flyctl#installation)
 
-**2. Log In**
-
-[Create a Fly account](https://fly.io/app/sign-up) if you haven't already signed up. Then login with:
+**Deleting data**
 
 ```bash
-$ flyctl auth login
-```
-
-**3. Clone the app**
-```bash
-$ git clone https://github.com/superfly/go-example.git
-```
-
-**4. Change into the example app directory**
-```bash
-$ cd go-example
-```
-
-## Deploy
-
-**1. Create a new app**
-```bash
-$ flyctl apps create
-```
-
-**2. Deploy**
-```bash
-$ flyctl deploy
-```
-
-**3. Find app's IP address**
-
-Each Fly app gets a unique IP address. You can view the IP address with:
-```bash
-$ flyctl info
-```
-
-**4. View your app**
-
-Now it's time to see your app in action. Load the IP address in a browser or use curl:
-
-```bash
-$ curl http://<APP-IP>
-```
-
-## Add a Secret and View Deployment Status
-
-**1. Set the Secret**
-
-The example app says hello to whatever is in the `NAME` env variable, or `"World"` of not set. Let's change the name:
-
-```bash
-$ flyctl secrets set NAME=you
-```
-
-**2. View Deployment Status**
-
-New VMs are stared each time your app changes. Once the new VMs are running the old ones are stopped. You can view the progress of a deployment and status about your app's VMs with the `status` command:
-
-```bash
-$ flyctl status
-```
-
-## View Logs
-
-Everything your app writes to STDOUT and STDERR is visible in your app's logs:
-
-```bash
-$ flyctl logs
+curl -XDELETE https://go-redis-cache-example.fly.dev/name
 ```
